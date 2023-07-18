@@ -47,7 +47,10 @@ public class AluguelService {
         }
         if (!ciclistaService.verificarPermiteAluguelCiclista(idCiclista)) {
             //Ciclista já tem um aluguel.
-            enviarEmailCiclistaComDadosAluguel(ciclista); //** INTEGRAÇÃO **
+            String corpoEmail = "Caro ciclista, você já tem um aluguel em andamento.";
+            Email email = new Email("pmemail@gmail.com", "Novo Aluguel", corpoEmail);
+
+            externoClient.emailCriado(email);
             return ResponseEntity.badRequest().build();
         }
         if (!bicicleta.getStatus().equals("DISPONÍVEL")) {
@@ -98,18 +101,7 @@ public class AluguelService {
         return ResponseEntity.ok(aluguel);
     }
 
-    // Método auxiliar para enviar email para o ciclista com os dados do aluguel
-    private void enviarEmailCiclistaComDadosAluguel(Ciclista ciclista) {
-        // Implemente a lógica para enviar o email
-    }
 
-    // Método auxiliar para enviar cobrança para a Administradora CC
-    private boolean enviarCobrancaAdministradora() {
-        // Implemente a lógica para enviar a cobrança
-        return true; // Retorno fictício para fins de exemplo
-    }
-
-    // Método auxiliar para calcular a cobrança do aluguel
     private double calcularCobranca() {
         return 10.00;
     }
