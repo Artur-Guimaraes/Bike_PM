@@ -8,6 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class EchoApplication {
 
+	public String PORT = System.getenv("PORT");
 	public static void main(String[] args) {
 		SpringApplication.run(EchoApplication.class, args);
 	}
